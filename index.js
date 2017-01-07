@@ -96,9 +96,14 @@ W215Accessory.prototype.getTotalPowerConsumption = function(callback) {
 
 W215Accessory.prototype.getState = function(callback) {
     var self = this;
+    this.retries = 0;
     dsp.state().done(function(state) {
         // Chances are of state is error we need to login again....
         if (state == 'ERROR') {
+            if (self.retries >= 5) {
+                return;
+            }
+            self.retries += 1;
             self.login(function(loginStatus) {
                 self.getState(callback);
             });
@@ -108,13 +113,14 @@ W215Accessory.prototype.getState = function(callback) {
             dsp.consumption().done(function(consumption) {
                 dsp.temperature().done(function(temperature) {
                     var settings = {
-                        on: state,
+                        power: state == 'true',
                         consumption: parseInt(consumption),
                         totalConsumption: parseFloat(totalConsumption),
                         temperature: parseFloat(temperature)
                     }
                     console.log("Values");
                     console.log(settings);
+                    self.retries = 0;
                     callback(settings);
                 });
             });

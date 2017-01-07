@@ -1,6 +1,6 @@
 {
     "name": "homebridge-w215",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "HomeBridge plugin for DSP w215",
     "main": "index.js",
     "scripts": {
