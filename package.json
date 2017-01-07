@@ -1,0 +1,30 @@
+{
+    "name": "homebridge-w215",
+    "version": "0.0.1",
+    "description": "HomeBridge plugin for DSP w215",
+    "main": "index.js",
+    "scripts": {
+        "test": "test.js"
+    },
+    "dependencies": {
+        "hnap": "2.1.0"
+    },
+    "author": "Ian Michell <ianmichell@icloud.com>",
+    "license": "APACHE 2.0",
+    "engines": {
+        "node": ">=0.12.0",
+        "homebridge": ">=0.3.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/thunderbird/homebridge-w215.git"
+    },
+    "keywords": [
+        "homebridge-plugin",
+        "D-Link",
+        "dlink",
+        "w215",
+        "w216b",
+        "dsp"
+    ]
+}
