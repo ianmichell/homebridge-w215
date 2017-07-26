@@ -1,0 +1,35 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'D:\\nodejs\\node.exe',
+1 verbose cli   'D:\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'publish' ]
+2 info using npm@3.10.10
+3 info using node@v6.11.1
+4 verbose publish [ '.' ]
+5 verbose stack Error: Failed to parse json
+5 verbose stack Unexpected token '"' at 29:9
+5 verbose stack         "require-uncached"
+5 verbose stack         ^
+5 verbose stack     at parseError (D:\nodejs\node_modules\npm\node_modules\read-package-json\read-json.js:390:11)
+5 verbose stack     at parseJson (D:\nodejs\node_modules\npm\node_modules\read-package-json\read-json.js:79:23)
+5 verbose stack     at D:\nodejs\node_modules\npm\node_modules\read-package-json\read-json.js:48:5
+5 verbose stack     at D:\nodejs\node_modules\npm\node_modules\graceful-fs\graceful-fs.js:78:16
+5 verbose stack     at tryToString (fs.js:456:3)
+5 verbose stack     at FSReqWrap.readFileAfterClose [as oncomplete] (fs.js:443:12)
+6 verbose cwd C:\Users\ianmi\projects\automation\homebridge-w215
+7 error Windows_NT 10.0.15063
+8 error argv "D:\\nodejs\\node.exe" "D:\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "publish"
+9 error node v6.11.1
+10 error npm  v3.10.10
+11 error file C:\Users\ianmi\projects\automation\homebridge-w215\package.json
+12 error code EJSONPARSE
+13 error Failed to parse json
+13 error Unexpected token '"' at 29:9
+13 error         "require-uncached"
+13 error         ^
+14 error File: C:\Users\ianmi\projects\automation\homebridge-w215\package.json
+15 error Failed to parse package.json data.
+15 error package.json must be actual JSON, not just JavaScript.
+15 error
+15 error This is not a bug in npm.
+15 error Tell the package author to fix their package.json file. JSON.parse
+16 verbose exit [ 1, true ]
