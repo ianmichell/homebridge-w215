@@ -1,7 +1,7 @@
 'use strict';
 
 var inherits = require('util').inherits;
-var dsp = require('hnap/js/soapclient');
+const requireUncached = require('require-uncached');
 
 var Characteristic, Service;
 
@@ -17,6 +17,7 @@ function W215Accessory(log, config, api) {
 
     this.log = log;
     this.config = config;
+    this.dsp = requireUncached('hnap/js/soapclient');
     this.name = config.name || 'DSP W215 Smart Plug';
     this.url = "http://" + config.host + "/HNAP1";
     this.username = config.username || 'admin';
@@ -49,7 +50,7 @@ function W215Accessory(log, config, api) {
 }
 
 W215Accessory.prototype.login = function(callback) {
-    dsp.login(this.username, this.password, this.url).done(callback);
+    this.dsp.login(this.username, this.password, this.url).done(callback);
 };
 
 W215Accessory.prototype.getPowerState = function(callback) {
@@ -68,13 +69,13 @@ W215Accessory.prototype.setPowerState = function(state, callback) {
     var self = this;
     console.log(state);
     if (state) {
-        dsp.on().done(function(res) {
+        this.dsp.on().done(function(res) {
             console.log(res);
             self.power = res;
             callback();
         });
     } else {
-        dsp.off().done(function(res) {
+        this.dsp.off().done(function(res) {
             console.log(res);
             self.power = res;
             callback();
@@ -97,7 +98,7 @@ W215Accessory.prototype.getTotalPowerConsumption = function(callback) {
 W215Accessory.prototype.getState = function(callback) {
     var self = this;
     this.retries = 0;
-    dsp.state().done(function(state) {
+    this.dsp.state().done(function(state) {
         // Chances are of state is error we need to login again....
         if (state == 'ERROR') {
             if (self.retries >= 5) {
@@ -109,9 +110,9 @@ W215Accessory.prototype.getState = function(callback) {
             });
             return;
         }
-        dsp.totalConsumption().done(function(totalConsumption) {
-            dsp.consumption().done(function(consumption) {
-                dsp.temperature().done(function(temperature) {
+        self.dsp.totalConsumption().done(function(totalConsumption) {
+            self.dsp.consumption().done(function(consumption) {
+                self.dsp.temperature().done(function(temperature) {
                     var settings = {
                         power: state == 'true',
                         consumption: parseInt(consumption),
@@ -129,7 +130,7 @@ W215Accessory.prototype.getState = function(callback) {
 };
 
 W215Accessory.prototype.identify = function(callback) {
-    callback();    
+    callback();
 };
 
 W215Accessory.prototype.getServices = function() {
@@ -152,7 +153,7 @@ W215Accessory.prototype.getServices = function() {
     // Temperature
     this.temperatureService = new Service.TemperatureSensor(this.name);
     this.temperatureService.getCharacteristic(Characteristic.CurrentTemperature).on('get', this.getTemperature.bind(this));
-    
+
     return [this.switchService, this.powerMeterService, this.temperatureService];
 };
 

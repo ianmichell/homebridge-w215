@@ -26,5 +26,6 @@
         "w215",
         "w216b",
         "dsp"
+        "require-uncached"
     ]
 }
