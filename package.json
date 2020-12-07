@@ -1,14 +1,14 @@
 {
     "name": "homebridge-w215",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "description": "HomeBridge plugin for DSP w215",
     "main": "index.js",
     "scripts": {
         "test": "test.js"
     },
     "dependencies": {
-        "hnap": "2.1.0",
-        "require-uncached": "1.0.3"
+        "hnap": ">=2.1.0",
+        "require-uncached": ">=1.0.3"
     },
     "author": "Ian Michell <ianmichell@icloud.com>",
     "license": "APACHE 2.0",
